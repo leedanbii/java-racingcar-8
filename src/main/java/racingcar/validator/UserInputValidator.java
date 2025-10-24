@@ -3,6 +3,7 @@ package racingcar.validator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import racingcar.converter.InputParser;
 
 public class UserInputValidator {
 
@@ -20,15 +21,18 @@ public class UserInputValidator {
     private UserInputValidator() {
     }
 
-    public static void validateCarNames(List<String> carNames) {
+    public static List<String> validateAndParseCarNames(String carNameStr) {
+        List<String> carNames = InputParser.parseCarNames(carNameStr);
+
         validateCarNamesNotEmpty(carNames);
         validateCarNameNotBlank(carNames);
         validateCarNameLength(carNames);
         validateNoduplicateCarNames(carNames);
+        return carNames;
     }
 
     private static void validateCarNamesNotEmpty(List<String> carNames) {
-        if (carNames == null || carNames.isEmpty()) {
+        if (carNames.isEmpty()) {
             throw new IllegalArgumentException(EMPTY_CAR_NAME_LIST);
         }
     }
@@ -55,11 +59,12 @@ public class UserInputValidator {
         }
     }
 
-    public static void validateTryCount(String tryCountStr) {
+    public static int validateAndParseTryCount(String tryCountStr) {
         validateTryCountNotEmpty(tryCountStr);
 
         int tryCountInt = parserInt(tryCountStr);
         validateTryCountPositive(tryCountInt);
+        return tryCountInt;
     }
 
     private static void validateTryCountNotEmpty(String tryCountStr) {
@@ -70,7 +75,7 @@ public class UserInputValidator {
 
     private static int parserInt(String tryCountStr) {
         try {
-            return Integer.parseInt(tryCountStr.trim());
+            return InputParser.parseTryCount(tryCountStr);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(NOT_NUMBER_TRY_COUNT);
         }
