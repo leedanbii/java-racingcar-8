@@ -7,8 +7,8 @@ public class RaceService {
     private static final String RACE_PROGRESS_SEPARATOR = " : ";
     private static final String RACE_STEP_MARK = "-";
 
-    public void runRace(List<Car> cars, int attempts) {
-        for (int i = 0; i < attempts; i++) {
+    public void runRace(List<Car> cars, int tryCount) {
+        for (int i = 0; i < tryCount; i++) {
             moveCars(cars);
             printRace(cars);
         }

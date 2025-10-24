@@ -1,19 +1,19 @@
 package racingcar.dto;
 
 public class UserInput {
-  private final String carNames;
-  private final String attempts;
+    private final String carNames;
+    private final String tryCount;
 
-  public UserInput(String carNames, String attempts) {
-    this.carNames = carNames;
-    this.attempts = attempts;
-  }
+    public UserInput(String carNames, String tryCount) {
+        this.carNames = carNames;
+        this.tryCount = tryCount;
+    }
 
-  public String getCarNames() {
-    return carNames;
-  }
+    public String getCarNames() {
+        return carNames;
+    }
 
-  public String getAttempts() {
-    return attempts;
-  }
+    public String getTryCount() {
+        return tryCount;
+    }
 }
