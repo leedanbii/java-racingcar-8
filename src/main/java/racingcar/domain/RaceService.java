@@ -22,14 +22,19 @@ public class RaceService {
         }
     }
 
-    private void printRace(List<Car> cars) {
+    public String generateRaceOutPut(List<Car> cars) {
+        StringBuilder sb = new StringBuilder();
         for (Car car : cars) {
-            System.out.print(car.getName() + RACE_PROGRESS_SEPARATOR);
-            for (int i = 0; i < car.getPosition(); i++) {
-                System.out.print(RACE_STEP_MARK);
-            }
-            System.out.println();
+            sb.append(car.getName())
+                    .append(RACE_PROGRESS_SEPARATOR)
+                    .append(RACE_STEP_MARK.repeat(car.getPosition()))
+                    .append("\n");
         }
+        return sb.toString();
+    }
+
+    private void printRace(List<Car> cars) {
+        System.out.print(generateRaceOutPut(cars));
     }
 
     private List<Car> findWinners(List<Car> cars) {
