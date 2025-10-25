@@ -3,6 +3,7 @@ package racingcar.domain;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.lang.reflect.Method;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class RaceServiceTest {
         findWinners.setAccessible(true);
 
         // when
-        List<Car> winners = (List<Car>) findWinners.invoke(raceService, List.of(car1, car2, car3));
+        List<Car> winners = invokePrivateFindWinners(List.of(car1, car2, car3));
 
         // then
         assertThat(winners).extracting(Car::getName).containsExactlyInAnyOrder("pobi", "jun");
@@ -40,10 +41,14 @@ public class RaceServiceTest {
 
     @Test
     void findWinners_emptyList_returnsEmpty() throws Exception {
+        //given
         var findWinners = RaceService.class.getDeclaredMethod("findWinners", List.class);
         findWinners.setAccessible(true);
 
-        List<Car> winners = (List<Car>) findWinners.invoke(raceService, List.of());
+        //when
+        List<Car> winners = invokePrivateFindWinners(List.of());
+
+        //then
         assertThat(winners).isEmpty();
     }
 
@@ -72,20 +77,12 @@ public class RaceServiceTest {
         // assertRandomNumberInRangeTest를 사용하면 내부에서 랜덤을 통제할 수 있음
         assertRandomNumberInRangeTest(
                 () -> {
-                    // 여기서 moveCars 호출 (private이라 리플렉션 필요)
-                    try {
-                        var moveCarsMethod = RaceService.class.getDeclaredMethod("moveCars", List.class);
-                        moveCarsMethod.setAccessible(true);
-                        moveCarsMethod.invoke(raceService, cars);
-                    } catch (Exception e) {
-                        throw new RuntimeException(e);
-                    }
+                    invokePrivateMoveCars(cars);
 
-                    // position 검증
                     assertThat(car1.getPosition()).isBetween(0, 1);
                     assertThat(car2.getPosition()).isBetween(0, 1);
                 },
-                4, 3  // 랜덤 숫자 지정: 4는 이동, 3은 정지
+                4, 3
         );
     }
 
@@ -100,5 +97,23 @@ public class RaceServiceTest {
         // then
         assertThat(winners).isNotEmpty();
         assertThat(winners).allSatisfy(car -> assertThat(car.getPosition()).isGreaterThanOrEqualTo(0));
+    }
+
+    
+    @SuppressWarnings("unchecked")
+    private List<Car> invokePrivateFindWinners(List<Car> cars) throws Exception {
+        Method findWinners = RaceService.class.getDeclaredMethod("findWinners", List.class);
+        findWinners.setAccessible(true);
+        return (List<Car>) findWinners.invoke(raceService, cars);
+    }
+
+    private void invokePrivateMoveCars(List<Car> cars) {
+        try {
+            Method moveCars = RaceService.class.getDeclaredMethod("moveCars", List.class);
+            moveCars.setAccessible(true);
+            moveCars.invoke(raceService, cars);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
