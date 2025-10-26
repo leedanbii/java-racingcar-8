@@ -17,11 +17,6 @@ public class Application {
         RaceController controller = new RaceController(input, output, raceService, formatter);
         RaceView view = new RaceView(controller);
 
-        try {
-            view.start();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-        }
+        view.start();
     }
 }
