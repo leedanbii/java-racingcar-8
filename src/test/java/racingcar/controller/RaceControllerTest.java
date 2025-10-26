@@ -14,6 +14,9 @@ import racingcar.view.Output;
 
 public class RaceControllerTest {
 
+    private static final int MOVING_FORWARD = 4;
+    private static final int STOP = 3;
+
     @Test
     void startRace_shouldPrintWinnersCorrectly() {
         // given
@@ -110,8 +113,8 @@ public class RaceControllerTest {
 
         // when
         Assertions.assertRandomNumberInRangeTest(
-                () -> controller.startRace(),
-                4, 3  // 4는 이동, 3은 정지
+                controller::startRace,
+                MOVING_FORWARD, STOP
         );
 
         // then

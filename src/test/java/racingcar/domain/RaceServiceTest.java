@@ -11,6 +11,9 @@ import racingcar.converter.CarFactory;
 
 public class RaceServiceTest {
 
+    private static final int MOVING_FORWARD = 4;
+    private static final int STOP = 3;
+
     private RaceService raceService;
 
     @BeforeEach
@@ -25,9 +28,9 @@ public class RaceServiceTest {
         Car car2 = new Car("jin");
         Car car3 = new Car("jun");
 
-        car1.move(5);
-        car2.move(3);
-        car3.move(5);
+        car1.move(MOVING_FORWARD);
+        car2.move(STOP);
+        car3.move(MOVING_FORWARD);
 
         var findWinners = RaceService.class.getDeclaredMethod("findWinners", List.class);
         findWinners.setAccessible(true);
@@ -58,8 +61,8 @@ public class RaceServiceTest {
         Car car1 = new Car("pobi");
         Car car2 = new Car("woni");
 
-        car1.move(5);
-        car2.move(3);
+        car1.move(MOVING_FORWARD);
+        car2.move(STOP);
 
         // when
         String output = raceService.generateRaceOutPut(List.of(car1, car2));
@@ -82,7 +85,7 @@ public class RaceServiceTest {
                     assertThat(car1.getPosition()).isBetween(0, 1);
                     assertThat(car2.getPosition()).isBetween(0, 1);
                 },
-                4, 3
+                MOVING_FORWARD, STOP
         );
     }
 
