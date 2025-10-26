@@ -51,7 +51,6 @@
 
 ## 🔗 코드 구조
 
-```jsx
 ```
 
 java-racingcar-8/
@@ -90,7 +89,6 @@ java-racingcar-8/
 │ └─ validator/
 │ └─ UserInputValidatorTest.java
 
-```
 ```
 
 ## 📝 **프로그래밍 요구 사항**
