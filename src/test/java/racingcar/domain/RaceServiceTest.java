@@ -69,7 +69,7 @@ public class RaceServiceTest {
     }
 
     @Test
-    void moveCars_shouldMoveCarsAccordingToRandomNumbers() {
+    void moveCars_shouldMoveCars_accordingToRandomNumbers() {
         Car car1 = new Car("pobi");
         Car car2 = new Car("jun");
         List<Car> cars = List.of(car1, car2);
@@ -99,7 +99,7 @@ public class RaceServiceTest {
         assertThat(winners).allSatisfy(car -> assertThat(car.getPosition()).isGreaterThanOrEqualTo(0));
     }
 
-    
+
     @SuppressWarnings("unchecked")
     private List<Car> invokePrivateFindWinners(List<Car> cars) throws Exception {
         Method findWinners = RaceService.class.getDeclaredMethod("findWinners", List.class);
