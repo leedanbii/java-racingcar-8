@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInRangeTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static racingcar.validator.UserInputValidator.BLANK_CAR_NAME;
 import static racingcar.validator.UserInputValidator.DUPLICATE_CAR_NAME;
 import static racingcar.validator.UserInputValidator.EMPTY_CAR_NAME_LIST;
@@ -31,66 +32,74 @@ class ApplicationTest extends NsTest {
 
     @Test
     void application_shouldThrowException_whenEmptyCarNames() {
-        assertSimpleTest(() -> {
-            runException("", "2");
-            assertThat(output()).contains(EMPTY_CAR_NAME_LIST);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("", "2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(EMPTY_CAR_NAME_LIST)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenBlankCarName() {
-        assertSimpleTest(() -> {
-            runException("jin,   ", "2");
-            assertThat(output()).contains(BLANK_CAR_NAME);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("jin,   ", "2"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(BLANK_CAR_NAME)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenTryCountIsInvalid() {
-        assertSimpleTest(() -> {
-            runException("pobi, jieun ", "0");
-            assertThat(output()).contains(LESS_THAN_ONE_TRY_COUNT);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi, jieun ", "0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(LESS_THAN_ONE_TRY_COUNT)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenCarNameTooLong() {
-        assertSimpleTest(() -> {
-            runException("pobi,pobiiiii", "4");
-            assertThat(output()).contains(TOO_LONG_CAR_NAME);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi,pobiiiii", "4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(TOO_LONG_CAR_NAME)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenDuplicateCarName() {
-        assertSimpleTest(() -> {
-            runException("pobi,pobi", "4");
-            assertThat(output()).contains(DUPLICATE_CAR_NAME);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi,pobi", "4"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(DUPLICATE_CAR_NAME)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenEmptyTryCount() {
-        assertSimpleTest(() -> {
-            runException("pobi,jin", "  ");
-            assertThat(output()).contains(EMPTY_TRY_COUNT);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi,jin", "  "))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(EMPTY_TRY_COUNT)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenNotNumberTryCount() {
-        assertSimpleTest(() -> {
-            runException("pobi, jin", "*");
-            assertThat(output()).contains(NOT_NUMBER_TRY_COUNT);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi, jin", "*"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(NOT_NUMBER_TRY_COUNT)
+        );
     }
 
     @Test
     void application_shouldThrowException_whenLessThanOneTryCount() {
-        assertSimpleTest(() -> {
-            runException("pobi, jin", "0");
-            assertThat(output()).contains(LESS_THAN_ONE_TRY_COUNT);
-        });
+        assertSimpleTest(() ->
+                assertThatThrownBy(() -> runException("pobi, jin", "0"))
+                        .isInstanceOf(IllegalArgumentException.class)
+                        .hasMessageContaining(LESS_THAN_ONE_TRY_COUNT)
+        );
     }
 
     @Override
