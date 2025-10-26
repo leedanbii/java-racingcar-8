@@ -4,9 +4,7 @@
 
 ## 📌 **요구 사항**
 
-사용자로부터 자동차 이름과 시도 횟수를 입력받아
-
-주어진 조건에 따라 자동차 경주를 진행하는 프로그램을 구현한다.
+사용자로부터 자동차 이름과 시도 횟수를 입력 받아 주어진 조건에 따라 자동차 경주를 진행하는 프로그램을 구현한다.
 
 # 📍 기능 목록
 
@@ -27,7 +25,6 @@
 
 - 경주가 끝난 후, 가장 **많이 이동한 자동차**를 우승자로 선정한다.
 - 이동 거리가 동일할 경우 공동 우승이 가능하다.
-- 공동 우승의 경우 쉼표(,)로 구분하여 출력한다.
 
 ## 입출력 기능
 
@@ -39,10 +36,11 @@
 - 출력:
     - 각 시도별 경주 결과
     - 최종 우승 안내 문구
+- 공동 우승의 경우 쉼표(,)로 구분하여 출력한다.
 
 ## 예외처리 기능
 
-- 잘못된 입력값이 들어온 경우 `IllegalArgumentException`을 발생시키고 프로그램을 종료한다.
+- 잘못된 입력값이 들어온 경우 `IllegalArgumentException`을 발생시키고 안내 메세지를 출력한 뒤 프로그램을 종료한다.
 - 예외 상황:
     - 이름이 5자를 초과할 경우
     - 빈 이름 혹은 공백 이름
@@ -50,6 +48,50 @@
     - 시도 횟수가 숫자가 아닌 경우
     - 시도 횟수가 1 미만인 경우
 - 프로그램 종료 시`System.exit()`를 호출하지 않는다.
+
+## 🔗 코드 구조
+
+```jsx
+```
+
+java-racingcar-8/
+├─ main/
+│ └─ racingcar/
+│ ├─ Application.java
+│ ├─ controller/
+│ │ └─ RaceController.java
+│ ├─ converter/
+│ │ ├─ CarFactory.java
+│ │ └─ InputParser.java
+│ ├─ domain/
+│ │ ├─ Car.java
+│ │ └─ RaceService.java
+│ ├─ dto/
+│ │ └─ UserInput.java
+│ ├─ formatter/
+│ │ └─ ResultFormatter.java
+│ ├─ validator/
+│ │ └─ UserInputValidator.java
+│ └─ view/
+│ ├─ Input.java
+│ ├─ Output.java
+│ └─ RaceView.java
+├─ test/
+│ └─ java/
+│ └─ racingcar/
+│ ├─ ApplicationTest.java
+│ ├─ controller/
+│ │ └─ RaceControllerTest.java
+│ ├─ domain/
+│ │ ├─ CarTest.java
+│ │ └─ RaceServiceTest.java
+│ ├─ formatter/
+│ │ └─ ResultFormatterTest.java
+│ └─ validator/
+│ └─ UserInputValidatorTest.java
+
+```
+```
 
 ## 📝 **프로그래밍 요구 사항**
 
@@ -68,3 +110,11 @@
 ✔ 함수가 한 가지 일만 하도록 만든다
 
 ✔ JUnit 5와 AssertJ를 이용하여 정리한 기능 목록이 정상적으로 작동하는지 테스트 코드로 확인한다
+
+## 💡MVC 패턴과 SRP 준수
+
+MVC 패턴을 적용하고, SRP을 지키는 것을 목표로 이번 미션을 수행했습니다.
+
+테스트 코드를 작성하기는 했지만, 아직은 부족한 점이 많은 것 같습니다.
+
+앞으로 남은 프리코스 일정 동안 학습하여 TDD 방식도 적용해보는 것이 목표입니다.
