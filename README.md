@@ -40,7 +40,7 @@
 
 ## 예외처리 기능
 
-- 잘못된 입력값이 들어온 경우 `IllegalArgumentException`을 발생시키고 안내 메세지를 출력한 뒤 프로그램을 종료한다.
+- 잘못된 입력값이 들어온 경우 `IllegalArgumentException`을 발생시키고 프로그램을 종료한다.
 - 예외 상황:
     - 이름이 5자를 초과할 경우
     - 빈 이름 혹은 공백 이름
@@ -55,39 +55,39 @@
 
 java-racingcar-8/
 ├─ main/
-│ └─ racingcar/
-│ ├─ Application.java
-│ ├─ controller/
-│ │ └─ RaceController.java
-│ ├─ converter/
-│ │ ├─ CarFactory.java
-│ │ └─ InputParser.java
-│ ├─ domain/
-│ │ ├─ Car.java
-│ │ └─ RaceService.java
-│ ├─ dto/
-│ │ └─ UserInput.java
-│ ├─ formatter/
-│ │ └─ ResultFormatter.java
-│ ├─ validator/
-│ │ └─ UserInputValidator.java
-│ └─ view/
-│ ├─ Input.java
-│ ├─ Output.java
-│ └─ RaceView.java
+│  └─ racingcar/
+│     ├─ Application.java
+│     ├─ controller/
+│     │  └─ RaceController.java
+│     ├─ converter/
+│     │  ├─ CarFactory.java
+│     │  └─ InputParser.java
+│     ├─ domain/
+│     │  ├─ Car.java
+│     │  └─ RaceService.java
+│     ├─ dto/
+│     │  └─ UserInput.java
+│     ├─ formatter/
+│     │  └─ ResultFormatter.java
+│     ├─ validator/
+│     │  └─ UserInputValidator.java
+│     └─ view/
+│        ├─ Input.java
+│        ├─ Output.java
+│        └─ RaceView.java
 ├─ test/
-│ └─ java/
-│ └─ racingcar/
-│ ├─ ApplicationTest.java
-│ ├─ controller/
-│ │ └─ RaceControllerTest.java
-│ ├─ domain/
-│ │ ├─ CarTest.java
-│ │ └─ RaceServiceTest.java
-│ ├─ formatter/
-│ │ └─ ResultFormatterTest.java
-│ └─ validator/
-│ └─ UserInputValidatorTest.java
+│  └─ java/
+│     └─ racingcar/
+│        ├─ ApplicationTest.java
+│        ├─ controller/
+│        │  └─ RaceControllerTest.java
+│        ├─ domain/
+│        │  ├─ CarTest.java
+│        │  └─ RaceServiceTest.java
+│        ├─ formatter/
+│        │  └─ ResultFormatterTest.java
+│        └─ validator/
+│           └─ UserInputValidatorTest.java
 
 ```
 
