@@ -8,9 +8,11 @@ public class RaceService {
     private static final String RACE_STEP_MARK = "-";
 
     public List<Car> runRace(List<Car> cars, int tryCount) {
+        System.out.println("\n실행 결과");
         for (int i = 0; i < tryCount; i++) {
             moveCars(cars);
             printRace(cars);
+            System.out.println();
         }
         return findWinners(cars);
     }
